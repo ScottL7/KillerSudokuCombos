@@ -3,13 +3,23 @@
     <string name="grid_size">Grid Size:</string>
     <string name="killer_sudoku_combos">Killer Sudoku Combos</string>
     <string name="default_grid_size">6</string>
-    <string name="grid_size_hint">Provide grid size from 3x3 to 9x9. Valid value is from 3 to 9.</string>
+    <string name="grid_size_hint">Provide grid size from 4x4 to 9x9. Valid value is from 4 to 9.</string>
+    <string name="grid_size_toast">Grid size now set to %dx%d</string>
     <string name="cage_sum">Cage Sum:</string>
     <string name="cage_size">Cage Size:</string>
     <string name="enter_cage_sum">Sum</string>
     <string name="enter_cage_size">Size</string>
+    <string name="results">&lt;p>
+                            &lt;center>
+                                &lt;big>List of Combos&lt;/big>
+                            &lt;/center>
+                           &lt;/p>
+                           &lt;p>[1,4, 6]&lt;br>
+                              [2, 3, 6]&lt;br>
+                              [2, 4, 5]&lt;br>
+                           &lt;/p>
+    </string>
     <string-array name="valid_grid_sizes">
-        <item>3</item>
         <item>4</item>
         <item>5</item>
         <item>6</item>

@@ -2,11 +2,13 @@ package com.leitstein.killersudokucombos
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import com.leitstein.killersudokucombos.ComboListGenerator
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,9 +18,14 @@ class MainActivity : AppCompatActivity() {
         // Valid grid sizes, used for the spinner
         val gridSizes = resources.getStringArray(R.array.valid_grid_sizes)
 
+        val test = ComboListGenerator(6).get_permutations_list(3)
+
+        val results = Html.fromHtml(getString(R.string.results), Html.FROM_HTML_MODE_LEGACY)
+        textViewResults.text = results
+
         spinnerGridSize.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, gridSizes)
-        spinnerGridSize.setSelection(3)
+        spinnerGridSize.setSelection(2)
 
         spinnerGridSize.onItemSelectedListener = object : AdapterView.OnItemClickListener,
             AdapterView.OnItemSelectedListener {
@@ -32,7 +39,10 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                Toast.makeText(this@MainActivity, gridSizes[position] , Toast.LENGTH_SHORT).show()
+                val size = gridSizes[position].toInt()
+                Toast.makeText(this@MainActivity, getString(R.string.grid_size_toast, size, size) , Toast.LENGTH_SHORT).show()
+                editTextCageSize.setText("")
+                editTextCageSum.setText("")
             }
 
             override fun onItemClick(
@@ -41,9 +51,8 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                Toast.makeText(this@MainActivity, gridSizes[position] , Toast.LENGTH_SHORT).show()
+//                // Nothing to do here...
             }
-
         }
     }
 }

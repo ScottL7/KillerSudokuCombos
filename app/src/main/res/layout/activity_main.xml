@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -92,7 +93,7 @@
                 android:ems="10"
                 android:hint="@string/enter_cage_sum"
                 android:inputType="number"
-                android:maxLength="1"
+                android:maxLength="2"
                 android:maxLines="1" />
         </LinearLayout>
 
@@ -102,7 +103,6 @@
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
             <TextView
                 android:id="@+id/textViewCageSize"
                 android:layout_width="wrap_content"
@@ -122,8 +122,24 @@
                 android:autofillHints="Enter Cage Sum"
                 android:ems="10"
                 android:hint="@string/enter_cage_size"
+                android:maxLength="2"
+                android:maxLines="1"
                 android:inputType="number" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewResults"
+        android:enabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCage"
+        tools:layout_editor_absoluteX="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
