@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Killer Sudoku Combos</string>
+    <string name="grid_size">Grid Size:</string>
+    <string name="killer_sudoku_combos">Killer Sudoku Combos</string>
+    <string name="default_grid_size">6</string>
+    <string name="grid_size_hint">Provide grid size from 3x3 to 9x9. Valid value is from 3 to 9.</string>
+    <string name="cage_sum">Cage Sum:</string>
+    <string name="cage_size">Cage Size:</string>
+    <string name="enter_cage_sum">Sum</string>
+    <string name="enter_cage_size">Size</string>
+    <string-array name="valid_grid_sizes">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+</resources>
