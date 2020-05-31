@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import com.leitstein.killersudokucombos.ComboListGenerator
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +17,13 @@ class MainActivity : AppCompatActivity() {
         // Valid grid sizes, used for the spinner
         val gridSizes = resources.getStringArray(R.array.valid_grid_sizes)
 
-        val test = ComboListGenerator(6).get_permutations_list(3)
+        val test = ComboListGenerator(6).buildComboList()
+
+        val iter = test.iterator()
+        while (iter.hasNext()) {
+            val currItem = iter.next()
+            println("Sum: ${currItem.sum}, List: ${currItem.listOfDigits}")
+        }
 
         val results = Html.fromHtml(getString(R.string.results), Html.FROM_HTML_MODE_LEGACY)
         textViewResults.text = results
