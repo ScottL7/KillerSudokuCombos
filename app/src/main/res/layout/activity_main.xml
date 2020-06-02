@@ -11,7 +11,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="cursive"
         android:text="@string/killer_sudoku_combos"
         android:textColor="#881010"
@@ -21,12 +21,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayoutGridSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
@@ -35,12 +34,11 @@
             android:id="@+id/txtViewGridSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
             android:text="@string/grid_size"
             android:textSize="18sp"
-            tools:layout_conversion_absoluteHeight="24dp"
-            tools:layout_editor_absoluteY="108dp"
-            tools:layout_editor_absoluteX="144dp"
-            tools:layout_conversion_absoluteWidth="75dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Spinner
             android:id="@+id/spinnerGridSize"
@@ -48,98 +46,115 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:minWidth="24dp"
-            tools:layout_conversion_absoluteHeight="24dp"
-            tools:layout_editor_absoluteY="108dp"
-            tools:layout_editor_absoluteX="219dp"
-            tools:layout_conversion_absoluteWidth="48dp" />
-    </LinearLayout>
+            app:layout_constraintStart_toEndOf="@+id/txtViewGridSize"
+            app:layout_constraintTop_toTopOf="@+id/txtViewGridSize" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayoutCage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="313dp"
+        android:layout_height="55dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutGridSize">
 
-        <LinearLayout
-            android:id="@+id/linearLayoutCageSum"
+        <TextView
+            android:id="@+id/textViewCageSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:text="@string/cage_size"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutGridSize">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textViewCageSum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cage_sum"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="59dp"
-                tools:layout_editor_absoluteY="154dp" />
+        <EditText
+            android:id="@+id/editTextCageSize"
+            android:layout_width="48dp"
+            android:layout_height="42dp"
+            android:autofillHints="Enter Cage Sum"
+            android:ems="10"
+            android:hint="@string/enter_cage_size"
+            android:inputType="number"
+            android:maxLength="2"
+            android:maxLines="1"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewCageSize"
+            app:layout_constraintStart_toEndOf="@+id/textViewCageSize"
+            app:layout_constraintTop_toTopOf="@+id/textViewCageSize" />
 
-            <EditText
-                android:id="@+id/editTextCageSum"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:autofillHints="Enter Cage Sum"
-                android:ems="10"
-                android:hint="@string/enter_cage_sum"
-                android:inputType="number"
-                android:maxLength="2"
-                android:maxLines="1" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textViewCageSizeHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-            <TextView
-                android:id="@+id/textViewCageSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cage_size"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="59dp"
-                tools:layout_editor_absoluteY="154dp" />
+            android:layout_marginStart="4dp"
+            android:text="@string/cage_size_hint"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewCageSize"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCageSize" />
 
-            <EditText
-                android:id="@+id/editTextCageSize"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:autofillHints="Enter Cage Sum"
-                android:ems="10"
-                android:hint="@string/enter_cage_size"
-                android:maxLength="2"
-                android:maxLines="1"
-                android:inputType="number" />
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textViewCageSum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/cage_sum"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/editTextCageSize"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextCageSum"
+            android:layout_width="52dp"
+            android:layout_height="39dp"
+            android:autofillHints="Enter Cage Sum"
+            android:ems="10"
+            android:hint="@string/enter_cage_sum"
+            android:inputType="number"
+            android:maxLength="2"
+            android:maxLines="1"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewCageSum"
+            app:layout_constraintStart_toEndOf="@id/textViewCageSum"
+            app:layout_constraintTop_toTopOf="@+id/textViewCageSum"
+            app:layout_constraintVertical_bias="0.533" />
+
+        <TextView
+            android:id="@+id/textViewCageSumHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/cage_sum_hint"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewCageSum"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCageSum" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textViewResults"
-        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:enabled="false"
         android:padding="8dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCage"
+        app:layout_constraintTop_toBottomOf="@+id/buttonShowCombos"
         tools:layout_editor_absoluteX="40dp" />
+
+    <Button
+        android:id="@+id/buttonShowCombos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/show_combos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

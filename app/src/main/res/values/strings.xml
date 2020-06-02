@@ -9,6 +9,8 @@
     <string name="cage_size">Cage Size:</string>
     <string name="enter_cage_sum">Sum</string>
     <string name="enter_cage_size">Size</string>
+    <string name="invalid_cage_size">Error: Invalid Cage Size, valid range 2 to %d</string>
+    <string name="invalid_cage_sum">Error: Invalid Cage Sum, valid range %s to %s</string>
     <string name="results">&lt;p>
                             &lt;center>
                                 &lt;big>List of Combos&lt;/big>
@@ -19,6 +21,10 @@
                               [2, 4, 5]&lt;br>
                            &lt;/p>
     </string>
+    <string name="cage_sum_hint">Valid Range: %s to %s</string>
+    <string name="cage_size_hint">Valid Range: %d to %d</string>
+    <string name="zero">0</string>
+    <string name="show_combos">Show Combos</string>
     <string-array name="valid_grid_sizes">
         <item>4</item>
         <item>5</item>
