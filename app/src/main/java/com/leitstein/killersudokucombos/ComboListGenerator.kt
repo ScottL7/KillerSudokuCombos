@@ -7,7 +7,6 @@ class ComboListGenerator (private val grid_size: Int) {
     class ItemType (val sum: Int = 0,  val listOfDigits: MutableList<Int>)
 
     private var digits =  mutableSetOf<Int>()
-//    private var comboList: MutableList<MutableSet<Int, List<Int>> = mutableListOf() as MutableList<Int, List<Int>>
     private var comboList = mutableListOf<ItemType>()
 
     init {
@@ -18,11 +17,10 @@ class ComboListGenerator (private val grid_size: Int) {
     private fun addToList(lst: Set<Set<Int>>) {
         val lstIterator = lst.iterator()
         while (lstIterator.hasNext()) {
-            var item = lstIterator.next()
-            item.sorted()
-//            comboList[item.sum()] = item.toList()
-            val test = ItemType(item.sum(), item.toMutableList())
-            comboList.add(test)
+            val item = lstIterator.next().toMutableList()
+            item.sort()
+            val newItem = ItemType(item.sum(), item)
+            comboList.add(newItem)
         }
     }
 

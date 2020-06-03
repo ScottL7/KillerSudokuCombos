@@ -11,16 +11,6 @@
     <string name="enter_cage_size">Size</string>
     <string name="invalid_cage_size">Error: Invalid Cage Size, valid range 2 to %d</string>
     <string name="invalid_cage_sum">Error: Invalid Cage Sum, valid range %s to %s</string>
-    <string name="results">&lt;p>
-                            &lt;center>
-                                &lt;big>List of Combos&lt;/big>
-                            &lt;/center>
-                           &lt;/p>
-                           &lt;p>[1,4, 6]&lt;br>
-                              [2, 3, 6]&lt;br>
-                              [2, 4, 5]&lt;br>
-                           &lt;/p>
-    </string>
     <string name="results_header">&lt;p>
                             &lt;center>
                                 &lt;big>List of Combos&lt;/big>
