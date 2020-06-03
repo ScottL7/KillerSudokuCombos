@@ -21,6 +21,12 @@
                               [2, 4, 5]&lt;br>
                            &lt;/p>
     </string>
+    <string name="results_header">&lt;p>
+                            &lt;center>
+                                &lt;big>List of Combos&lt;/big>
+                            &lt;/center>
+                           &lt;/p>
+    </string>
     <string name="cage_sum_hint">Valid Range: %s to %s</string>
     <string name="cage_size_hint">Valid Range: %d to %d</string>
     <string name="zero">0</string>

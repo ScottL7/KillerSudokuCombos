@@ -3,9 +3,7 @@ package com.leitstein.killersudokucombos
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.text.Html
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -25,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     // These depend on the cage size
     private var minCageSum = 0
     private var maxCageSum = 0
+
+    private var validCageSize = false
+    private var validCageSum = false
 
     private var allCombosList = mutableListOf<ItemType>()
 
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 maxCageSum = 0
                 editTextCageSize.setText("")
                 editTextCageSum.setText("")
+                textViewResults.text = ""
                 updateCageHints()
                 Log.i(TAG, "Grid sized changed: Grid size = $currGridSize" +
                         "Grid sized changed: Cage Size Hint = '${textViewCageSizeHint.text.toString()}'")
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             val currVal = editTextCageSize.text.toString()
             if (currVal != "") {
                 val currCageSize = currVal.toInt()
-                if ((currCageSize < 2) or (currCageSize > currGridSize)) {
+                validCageSize = if ((currCageSize < 2) or (currCageSize > currGridSize)) {
                     editTextCageSize.setText("")
                     minCageSum = 0
                     maxCageSum = 0
@@ -105,13 +107,16 @@ class MainActivity : AppCompatActivity() {
                         getString(R.string.invalid_cage_size, currGridSize),
                         Toast.LENGTH_LONG
                     ).show()
+                    false
                 } else {
                     minCageSum = (1..currCageSize).sum()
                     maxCageSum = ((currGridSize-currCageSize+1)..currGridSize).sum()
                     if (minCageSum == maxCageSum) editTextCageSum.setText(minCageSum.toString())
                     updateCageHints()
+                    true
                 }
             }
+            checkButton()
             hideSoftKeyboard(this@MainActivity, v)
         }
 
@@ -120,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             val currVal = editTextCageSum.text.toString()
             if (currVal != "") {
                 val currCageSum = currVal.toInt()
-                if ((currCageSum < minCageSum) or (currCageSum > maxCageSum)) {
+                validCageSum = if ((currCageSum < minCageSum) or (currCageSum > maxCageSum)) {
                     editTextCageSum.setText("")
                     Toast.makeText(
                         this@MainActivity,
@@ -129,14 +134,20 @@ class MainActivity : AppCompatActivity() {
                             maxCageSum.toString()),
                         Toast.LENGTH_LONG
                     ).show()
+                    false
+                } else {
+                    true
                 }
             }
+            checkButton()
             hideSoftKeyboard(this@MainActivity, v)
         }
 
         buttonShowCombos.setOnClickListener {
-            updateResultsText()
+            updateResultsText(editTextCageSize.text.toString().toInt(),
+                              editTextCageSum.text.toString().toInt())
         }
+        checkButton()
     }
 
     private fun updateCageHints() {
@@ -146,11 +157,25 @@ class MainActivity : AppCompatActivity() {
                                     if (maxCageSum == 0) "?" else maxCageSum.toString())
     }
 
-    fun updateResultsText() {
+    private fun checkButton() {
+        buttonShowCombos.isEnabled = validCageSize and validCageSum
+    }
 
-        var results = Html.fromHtml(getString(R.string.results), Html.FROM_HTML_MODE_LEGACY)
+    private fun updateResultsText(cageSize: Int, cageSum: Int) {
+
+//        var results = Html.fromHtml(getString(R.string.results), Html.FROM_HTML_MODE_LEGACY)
+        var resultsText = getString(R.string.results_header)
+
+//        resultsText += "&lt;p>"
+        val list = allCombosList.groupBy { it.sum }
+        val sumIterator = (list[cageSum] ?: error("")).iterator()
+        while (sumIterator.hasNext()) {
+            val currItem = sumIterator.next().listOfDigits
+            if (currItem.size == cageSize) resultsText += "<li>$currItem"
+        }
+//        resultsText += "&lt;/p>"
+        val results = Html.fromHtml(resultsText, Html.FROM_HTML_MODE_LEGACY)
         textViewResults.text = results
-
     }
 
     /**
@@ -159,7 +184,7 @@ class MainActivity : AppCompatActivity() {
      * @param activity the activity from which to get the IMM
      * @param view the view from which to provide a windowToken
      */
-    fun hideSoftKeyboard(activity: Activity, view: View?) {
+    private fun hideSoftKeyboard(activity: Activity, view: View?) {
         val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
