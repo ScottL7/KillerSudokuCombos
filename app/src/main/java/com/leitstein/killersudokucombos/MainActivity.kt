@@ -34,19 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Valid grid sizes, used for the spinner
-        val gridSizes = resources.getStringArray(R.array.valid_grid_sizes)
-
-//        val test = ComboListGenerator(6).buildComboList()
-//
-//        val iter = test.iterator()
-//        while (iter.hasNext()) {
-//            val currItem = iter.next()
-//            Log.i(TAG, "Sum: ${currItem.sum}, List: ${currItem.listOfDigits}")
-//            println("Sum: ${currItem.sum}, List: ${currItem.listOfDigits}")
-//        }
-//
-//
-//        textViewResults.text = getResultsText()
+        val gridSizes = buildSpinnerList(4, 9)
 
         spinnerGridSize.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, gridSizes)
@@ -93,7 +81,6 @@ class MainActivity : AppCompatActivity() {
         // Set default Grid Size to 6 (3rd position in the string-array
         spinnerGridSize.setSelection(2)
 
-//        editTextCageSize.filters = arrayOf(InputFilterMinMax(2, currGridSize))
         editTextCageSize.setOnFocusChangeListener { v, _ ->
             val currVal = editTextCageSize.text.toString()
             if (currVal != "") {
@@ -120,7 +107,6 @@ class MainActivity : AppCompatActivity() {
             hideSoftKeyboard(this@MainActivity, v)
         }
 
-//        editTextCageSum.filters = arrayOf(InputFilterMinMax(3, maxCageSum))
         editTextCageSum.setOnFocusChangeListener { v, _ ->
             val currVal = editTextCageSum.text.toString()
             if (currVal != "") {
@@ -187,5 +173,13 @@ class MainActivity : AppCompatActivity() {
     private fun hideSoftKeyboard(activity: Activity, view: View?) {
         val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    private fun buildSpinnerList( start: Int,  end: Int) : Array<String> {
+        val spinnerList = mutableListOf<String>()
+        for (entry in start..end) {
+            spinnerList.add(entry.toString())
+        }
+        return spinnerList.toTypedArray()
     }
 }

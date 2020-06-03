@@ -31,12 +31,4 @@
     <string name="cage_size_hint">Valid Range: %d to %d</string>
     <string name="zero">0</string>
     <string name="show_combos">Show Combos</string>
-    <string-array name="valid_grid_sizes">
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-    </string-array>
 </resources>
