@@ -14,14 +14,13 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import com.leitstein.killersudokucombos.ComboListGenerator.*
+import org.jetbrains.anko.doAsync
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = javaClass.simpleName.toString()
 
     private var currGridSize : Int = 6
-    private var currCageSize : Int = 0
-    private var currCageSum : Int = 0
 
     // These depend on the cage size
     private var minCageSum = 0
@@ -64,15 +63,21 @@ class MainActivity : AppCompatActivity() {
                 id: Long
             ) {
                 currGridSize = gridSizes[position].toInt()
+                minCageSum = 0
                 maxCageSum = 0
-                updateCageHints()
-                Log.i(TAG, "onItemSelected: Grid size = $currGridSize")
-                allCombosList = ComboListGenerator(currGridSize).buildComboList()
-                Toast.makeText(this@MainActivity, getString(R.string.grid_size_toast, currGridSize, currGridSize) , Toast.LENGTH_LONG).show()
-
                 editTextCageSize.setText("")
                 editTextCageSum.setText("")
-            }
+                updateCageHints()
+                Log.i(TAG, "Grid sized changed: Grid size = $currGridSize" +
+                        "Grid sized changed: Cage Size Hint = '${textViewCageSizeHint.text.toString()}'")
+
+                doAsync {
+                    allCombosList = ComboListGenerator(currGridSize).buildComboList()
+                }
+
+                Toast.makeText(this@MainActivity, getString(R.string.grid_size_toast, currGridSize, currGridSize) , Toast.LENGTH_LONG).show()
+                editTextCageSize.requestFocus()
+4            }
 
             override fun onItemClick(
                 parent: AdapterView<*>?,
@@ -103,11 +108,12 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     minCageSum = (1..currCageSize).sum()
                     maxCageSum = ((currGridSize-currCageSize+1)..currGridSize).sum()
+                    if (minCageSum == maxCageSum) editTextCageSum.setText(minCageSum.toString())
                     updateCageHints()
                 }
             }
             hideSoftKeyboard(this@MainActivity, v)
-44        }
+        }
 
 //        editTextCageSum.filters = arrayOf(InputFilterMinMax(3, maxCageSum))
         editTextCageSum.setOnFocusChangeListener { v, _ ->

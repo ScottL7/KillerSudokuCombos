@@ -64,16 +64,16 @@
             android:id="@+id/textViewCageSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="@string/cage_size"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editTextCageSize"
             android:layout_width="48dp"
-            android:layout_height="42dp"
+            android:layout_height="wrap_content"
             android:autofillHints="Enter Cage Sum"
             android:ems="10"
             android:hint="@string/enter_cage_size"
@@ -89,9 +89,9 @@
             android:id="@+id/textViewCageSizeHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:text="@string/cage_size_hint"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textViewCageSize"
             app:layout_constraintTop_toBottomOf="@+id/textViewCageSize" />
 
@@ -100,16 +100,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
             android:text="@string/cage_sum"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/editTextCageSize"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editTextCageSum"
             android:layout_width="52dp"
-            android:layout_height="39dp"
+            android:layout_height="wrap_content"
             android:autofillHints="Enter Cage Sum"
             android:ems="10"
             android:hint="@string/enter_cage_sum"
@@ -126,9 +126,9 @@
             android:id="@+id/textViewCageSumHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:text="@string/cage_sum_hint"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textViewCageSum"
             app:layout_constraintTop_toBottomOf="@+id/textViewCageSum" />
 
@@ -138,11 +138,12 @@
         android:id="@+id/textViewResults"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="8dp"
         android:enabled="false"
         android:padding="8dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
+        android:background="@android:drawable/editbox_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonShowCombos"
         tools:layout_editor_absoluteX="40dp" />
