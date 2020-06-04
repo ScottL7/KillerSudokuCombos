@@ -9,9 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import com.leitstein.killersudokucombos.ComboListGenerator.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     private var minCageSum = 0
     private var maxCageSum = 0
 
-    private var allCombosList = mutableListOf<ItemType>()
+//    private var allCombosList = mutableListOf<ItemType>()
+    private var allCombosList = mapOf<Int, List<ComboListGenerator.ItemType>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 updateCageSumRangeAndSpinner()
 
                 doAsync {
-                    allCombosList = ComboListGenerator(currGridSize).buildComboList()
+                    allCombosList = ComboListGenerator(currGridSize).comboList()
                 }
                 Toast.makeText(this@MainActivity, getString(R.string.grid_size_toast, currGridSize, currGridSize) , Toast.LENGTH_LONG).show()
             }
@@ -140,18 +139,12 @@ class MainActivity : AppCompatActivity() {
 
         var resultsText = getString(R.string.results_header)
 
-        doAsync {
-            val list = allCombosList.groupBy { it.sum }
-            val sumIterator = (list[currCageSum] ?: error("")).iterator()
-            while (sumIterator.hasNext()) {
-                val currItem = sumIterator.next().listOfDigits
-                if (currItem.size == currCageSize) resultsText += "<li>$currItem"
-            }
-            uiThread {
-                val results = Html.fromHtml(resultsText, Html.FROM_HTML_MODE_LEGACY)
-                textViewResults.text = results
-            }
+        val iterator = allCombosList[currCageSum]?.reversed()?.iterator()
+        iterator?.forEach {
+            if (it.listOfDigits.size == currCageSize) resultsText += "<li>${it.listOfDigits}"
         }
+        val results = Html.fromHtml(resultsText, Html.FROM_HTML_MODE_LEGACY)
+        textViewResults.text = results
     }
 
     private fun updateSpinnerList(spinner: Spinner, start: Int, end: Int) {

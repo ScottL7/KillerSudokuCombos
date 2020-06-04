@@ -28,10 +28,9 @@ class ComboListGenerator (private val grid_size: Int) {
         return digits.combinations(numDigits)
     }
 
-    fun buildComboList() : MutableList<ItemType> {
+    fun comboList() : Map<Int, List<ItemType>> {
         for (i in 2..grid_size)
             addToList(getPermutationsList(i))
-        comboList.sortBy { it.sum }
-        return this.comboList
+        return comboList.groupBy { it.sum }
     }
 }
